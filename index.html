@@ -1,935 +1,137 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    
-        <script>
-            L_NO_TOUCH = false;
-            L_DISABLE_3D = false;
-        </script>
-    
-    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
-    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
-    
-            <meta name="viewport" content="width=device-width,
-                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-            <style>
-                #map_dd43c282aee3df6fa1f22f80f4410784 {
-                    position: relative;
-                    width: 100.0%;
-                    height: 100.0%;
-                    left: 0.0%;
-                    top: 0.0%;
-                }
-            </style>
-        
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+<meta charset="UTF-8">
+<title>Itinerario Roma</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.tabs {
+    display: flex;
+    cursor: pointer;
+    background-color: #333;
+}
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 14px;
+    color: white;
+    background-color: #333;
+    transition: background-color 0.3s;
+}
+.tab:hover {
+    background-color: #444;
+}
+.tab.active {
+    background-color: #555;
+}
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+.tab-content.active {
+    display: block;
+}
+details {
+    margin-bottom: 15px;
+}
+details summary {
+    font-weight: bold;
+    cursor: pointer;
+}
+iframe {
+    width: 100%;
+    height: 80vh;
+    border: none;
+}
+</style>
+<script>
+function showTab(tabIndex) {
+    var tabs = document.getElementsByClassName("tab");
+    var contents = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+        contents[i].classList.remove("active");
+    }
+    tabs[tabIndex].classList.add("active");
+    contents[tabIndex].classList.add("active");
+}
+</script>
 </head>
 <body>
-    
-    
-            <div class="folium-map" id="map_dd43c282aee3df6fa1f22f80f4410784" ></div>
-        
+
+<div class="tabs">
+    <div class="tab active" onclick="showTab(0)">📅 Itinerario</div>
+    <div class="tab" onclick="showTab(1)">🗺️ Mapa</div>
+</div>
+
+<div class="tab-content active">
+
+<h2>Itinerario en Roma</h2>
+<div>
+<details open><summary><b>📅 Día 1 – Martes (14:00 – noche)</b></summary>
+<p><i>Tema del día: Primer contacto con Roma – centro histórico y plazas más icónicas.</i></p>
+<ul>
+<li>14:00 – Llegada y check-in</li>
+<li>15:00 – Paseo: Piazza Navona, Panteón de Agripa, Fontana di Trevi, Piazza di Spagna</li>
+<li>18:30 – Aperitivo en Salotto 42 o Caffè Propaganda</li>
+<li>20:00 – Cena en Trattoria da Enzo al 29</li>
+<li>21:30 – Paseo nocturno por Puente Sant’Angelo y Campo de’ Fiori</li>
+</ul>
+</details>
+
+<details><summary><b>📅 Día 2 – Miércoles</b></summary>
+<p><i>Tema del día: Antigua Roma – Coliseo, Foro, Palatino y alrededores.</i></p>
+<ul>
+<li>08:00 – Desayuno en Panella o Sant’Eustachio Il Caffè</li>
+<li>08:45 – Coliseo</li>
+<li>10:45 – Foro Romano y Palatino</li>
+<li>13:00 – Almuerzo en Taverna dei Fori Imperiali</li>
+<li>14:30 – Piazza Venezia y Monumento a Vittorio Emanuele II</li>
+<li>16:00 – Barrio Monti y helado en Fatamorgana</li>
+<li>18:00 – Aperitivo en Ai Tre Scalini</li>
+<li>20:00 – Cena en Hostaria Romana</li>
+</ul>
+</details>
+
+<details><summary><b>📅 Día 3 – Jueves</b></summary>
+<p><i>Tema del día: Ciudad del Vaticano + Borgo + Castel Sant’Angelo.</i></p>
+<ul>
+<li>07:30 – Desayuno rápido en Pastificio Guerra</li>
+<li>08:00 – Museos Vaticanos y Capilla Sixtina</li>
+<li>11:00 – Basílica de San Pedro y subida a la cúpula</li>
+<li>13:00 – Almuerzo en Pizzarium Bonci</li>
+<li>14:30 – Castel Sant’Angelo</li>
+<li>16:00 – Paseo por Borgo Pio</li>
+<li>17:30 – Aperitivo en terraza Les Étoiles</li>
+<li>20:00 – Cena en Osteria dell’Angelo</li>
+</ul>
+</details>
+
+<details><summary><b>📅 Día 4 – Viernes</b></summary>
+<p><i>Tema del día: Barrios y plazas – despedida de Roma.</i></p>
+<ul>
+<li>08:00 – Desayuno en Roscioli Caffè</li>
+<li>09:00 – Trastevere y Santa Maria in Trastevere</li>
+<li>11:00 – Villa Farnesina</li>
+<li>12:30 – Almuerzo en Da Teo</li>
+<li>14:00 – Gianicolo</li>
+<li>16:00 – Campo de’ Fiori y compras</li>
+<li>17:00 – Aperitivo en Enoteca Ferrara</li>
+<li>18:00 – Regreso al hotel / aeropuerto</li>
+</ul>
+</details>
+</div>
+
+</div>
+
+<div class="tab-content">
+    <iframe src="map.html"></iframe>
+</div>
+
 </body>
-<script>
-    
-    
-            var map_dd43c282aee3df6fa1f22f80f4410784 = L.map(
-                "map_dd43c282aee3df6fa1f22f80f4410784",
-                {
-                    center: [41.9028, 12.4964],
-                    crs: L.CRS.EPSG3857,
-                    zoom: 13,
-                    zoomControl: true,
-                    preferCanvas: false,
-                }
-            );
-
-            
-
-        
-    
-            var tile_layer_cdb5ae2beb53bfc1dae4fcbeae00673f = L.tileLayer(
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_dd43c282aee3df6fa1f22f80f4410784);
-        
-    
-            var marker_cluster_6a7eeec4406663d285fc81f925fdf933 = L.markerClusterGroup(
-                {}
-            );
-            map_dd43c282aee3df6fa1f22f80f4410784.addLayer(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var marker_2c56258454061fef2b7d38c4a31cdf4a = L.marker(
-                [41.8992, 12.4731],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_818cae7abd85699eaee490deee422a8f = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_2c56258454061fef2b7d38c4a31cdf4a.setIcon(icon_818cae7abd85699eaee490deee422a8f);
-        
-    
-        var popup_ba6d88284e55a9242f7ae236f0cae06a = L.popup({"maxWidth": "100%"});
-
-        
-            var html_e496d43432cf35dc9cb7f2e18e74322e = $(`<div id="html_e496d43432cf35dc9cb7f2e18e74322e" style="width: 100.0%; height: 100.0%;"><b>Piazza Navona</b><br>Día 1: Plazas y centro histórico</div>`)[0];
-            popup_ba6d88284e55a9242f7ae236f0cae06a.setContent(html_e496d43432cf35dc9cb7f2e18e74322e);
-        
-
-        marker_2c56258454061fef2b7d38c4a31cdf4a.bindPopup(popup_ba6d88284e55a9242f7ae236f0cae06a)
-        ;
-
-        
-    
-    
-            marker_2c56258454061fef2b7d38c4a31cdf4a.bindTooltip(
-                `<div>
-                     Piazza Navona
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_15db064a84b0f9738845733e7a038438 = L.marker(
-                [41.8986, 12.4768],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_bb967316412a5c8b6cba5edefec7e3a3 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_15db064a84b0f9738845733e7a038438.setIcon(icon_bb967316412a5c8b6cba5edefec7e3a3);
-        
-    
-        var popup_71976f641fa9314e40b4057e4b6e7610 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_f582d1d366411bd725ab0270058ab05c = $(`<div id="html_f582d1d366411bd725ab0270058ab05c" style="width: 100.0%; height: 100.0%;"><b>Panteón de Agripa</b><br>Día 1: Centro histórico</div>`)[0];
-            popup_71976f641fa9314e40b4057e4b6e7610.setContent(html_f582d1d366411bd725ab0270058ab05c);
-        
-
-        marker_15db064a84b0f9738845733e7a038438.bindPopup(popup_71976f641fa9314e40b4057e4b6e7610)
-        ;
-
-        
-    
-    
-            marker_15db064a84b0f9738845733e7a038438.bindTooltip(
-                `<div>
-                     Panteón de Agripa
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_18f8c894d61b8fca13f06c52330822c2 = L.marker(
-                [41.9009, 12.4833],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_78fbc1d4ea10998f5b0693e9cf91bdb1 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_18f8c894d61b8fca13f06c52330822c2.setIcon(icon_78fbc1d4ea10998f5b0693e9cf91bdb1);
-        
-    
-        var popup_02d89236d61591f7648f1ab0a87a9707 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_192a43f738163f897db8ff78c31a7817 = $(`<div id="html_192a43f738163f897db8ff78c31a7817" style="width: 100.0%; height: 100.0%;"><b>Fontana di Trevi</b><br>Día 1: Centro histórico</div>`)[0];
-            popup_02d89236d61591f7648f1ab0a87a9707.setContent(html_192a43f738163f897db8ff78c31a7817);
-        
-
-        marker_18f8c894d61b8fca13f06c52330822c2.bindPopup(popup_02d89236d61591f7648f1ab0a87a9707)
-        ;
-
-        
-    
-    
-            marker_18f8c894d61b8fca13f06c52330822c2.bindTooltip(
-                `<div>
-                     Fontana di Trevi
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_1266ebb8f4429168414b0dabf382cace = L.marker(
-                [41.9059, 12.4823],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_5e77790c2d7a95d4dbb4c6300d6af43c = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_1266ebb8f4429168414b0dabf382cace.setIcon(icon_5e77790c2d7a95d4dbb4c6300d6af43c);
-        
-    
-        var popup_d1fe1d5cd1ba2c9711448864a52a245d = L.popup({"maxWidth": "100%"});
-
-        
-            var html_271f6fff95d79b34c49a94b3177ef728 = $(`<div id="html_271f6fff95d79b34c49a94b3177ef728" style="width: 100.0%; height: 100.0%;"><b>Piazza di Spagna</b><br>Día 1: Centro histórico</div>`)[0];
-            popup_d1fe1d5cd1ba2c9711448864a52a245d.setContent(html_271f6fff95d79b34c49a94b3177ef728);
-        
-
-        marker_1266ebb8f4429168414b0dabf382cace.bindPopup(popup_d1fe1d5cd1ba2c9711448864a52a245d)
-        ;
-
-        
-    
-    
-            marker_1266ebb8f4429168414b0dabf382cace.bindTooltip(
-                `<div>
-                     Piazza di Spagna
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_3a940da9fa6662e359f0253fe7957ed7 = L.marker(
-                [41.8893, 12.4703],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_2a552fe336f82e5b9b8c41a98604b201 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_3a940da9fa6662e359f0253fe7957ed7.setIcon(icon_2a552fe336f82e5b9b8c41a98604b201);
-        
-    
-        var popup_1fc7d62ab776207185fa89428713695e = L.popup({"maxWidth": "100%"});
-
-        
-            var html_a6ec2696ef7336539cee4111be219fa7 = $(`<div id="html_a6ec2696ef7336539cee4111be219fa7" style="width: 100.0%; height: 100.0%;"><b>Trattoria da Enzo al 29</b><br>Día 1: Cena en Trastevere</div>`)[0];
-            popup_1fc7d62ab776207185fa89428713695e.setContent(html_a6ec2696ef7336539cee4111be219fa7);
-        
-
-        marker_3a940da9fa6662e359f0253fe7957ed7.bindPopup(popup_1fc7d62ab776207185fa89428713695e)
-        ;
-
-        
-    
-    
-            marker_3a940da9fa6662e359f0253fe7957ed7.bindTooltip(
-                `<div>
-                     Trattoria da Enzo al 29
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_0b6f7a8eec65fa1127dba06f26208f14 = L.marker(
-                [41.9022, 12.4663],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_2604c1087a709119bb03d71190dfe9f5 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_0b6f7a8eec65fa1127dba06f26208f14.setIcon(icon_2604c1087a709119bb03d71190dfe9f5);
-        
-    
-        var popup_e064b90cfb07c2258c0ec7dbb1ac51f3 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_afbed2cd45f3472526c2d240fe54f704 = $(`<div id="html_afbed2cd45f3472526c2d240fe54f704" style="width: 100.0%; height: 100.0%;"><b>Puente Sant’Angelo</b><br>Día 1: Paseo nocturno</div>`)[0];
-            popup_e064b90cfb07c2258c0ec7dbb1ac51f3.setContent(html_afbed2cd45f3472526c2d240fe54f704);
-        
-
-        marker_0b6f7a8eec65fa1127dba06f26208f14.bindPopup(popup_e064b90cfb07c2258c0ec7dbb1ac51f3)
-        ;
-
-        
-    
-    
-            marker_0b6f7a8eec65fa1127dba06f26208f14.bindTooltip(
-                `<div>
-                     Puente Sant’Angelo
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_599f6159500c07bb19291aebb9d74758 = L.marker(
-                [41.8902, 12.4922],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_c139cb4068cc46bd686b47f4f6032ecb = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_599f6159500c07bb19291aebb9d74758.setIcon(icon_c139cb4068cc46bd686b47f4f6032ecb);
-        
-    
-        var popup_0ef92761b49f4f79b33acb6c4a425290 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_607c58b3ab3d957e4af7b0b6a600fb02 = $(`<div id="html_607c58b3ab3d957e4af7b0b6a600fb02" style="width: 100.0%; height: 100.0%;"><b>Coliseo</b><br>Día 2: Antigua Roma</div>`)[0];
-            popup_0ef92761b49f4f79b33acb6c4a425290.setContent(html_607c58b3ab3d957e4af7b0b6a600fb02);
-        
-
-        marker_599f6159500c07bb19291aebb9d74758.bindPopup(popup_0ef92761b49f4f79b33acb6c4a425290)
-        ;
-
-        
-    
-    
-            marker_599f6159500c07bb19291aebb9d74758.bindTooltip(
-                `<div>
-                     Coliseo
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_bcb8a526c038c8ea6bebc5e7a04ba8dd = L.marker(
-                [41.8925, 12.4853],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_73021e8d8bb04a288efd0381bf42d66d = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_bcb8a526c038c8ea6bebc5e7a04ba8dd.setIcon(icon_73021e8d8bb04a288efd0381bf42d66d);
-        
-    
-        var popup_5988002b18ebe90b9bf8c71327055b8e = L.popup({"maxWidth": "100%"});
-
-        
-            var html_030f7cc4374a320f100a8a32fc5c36cd = $(`<div id="html_030f7cc4374a320f100a8a32fc5c36cd" style="width: 100.0%; height: 100.0%;"><b>Foro Romano</b><br>Día 2: Antigua Roma</div>`)[0];
-            popup_5988002b18ebe90b9bf8c71327055b8e.setContent(html_030f7cc4374a320f100a8a32fc5c36cd);
-        
-
-        marker_bcb8a526c038c8ea6bebc5e7a04ba8dd.bindPopup(popup_5988002b18ebe90b9bf8c71327055b8e)
-        ;
-
-        
-    
-    
-            marker_bcb8a526c038c8ea6bebc5e7a04ba8dd.bindTooltip(
-                `<div>
-                     Foro Romano
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_c51316697d2e05e666cb6f3ba5ebafbe = L.marker(
-                [41.8894, 12.4881],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_736584cf9841363f58d27bc27d66294f = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_c51316697d2e05e666cb6f3ba5ebafbe.setIcon(icon_736584cf9841363f58d27bc27d66294f);
-        
-    
-        var popup_b961bfbbfe390f894f96d2b618f65daf = L.popup({"maxWidth": "100%"});
-
-        
-            var html_3bf89b1a5fb0648a6c4b65350f14e917 = $(`<div id="html_3bf89b1a5fb0648a6c4b65350f14e917" style="width: 100.0%; height: 100.0%;"><b>Palatino</b><br>Día 2: Antigua Roma</div>`)[0];
-            popup_b961bfbbfe390f894f96d2b618f65daf.setContent(html_3bf89b1a5fb0648a6c4b65350f14e917);
-        
-
-        marker_c51316697d2e05e666cb6f3ba5ebafbe.bindPopup(popup_b961bfbbfe390f894f96d2b618f65daf)
-        ;
-
-        
-    
-    
-            marker_c51316697d2e05e666cb6f3ba5ebafbe.bindTooltip(
-                `<div>
-                     Palatino
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_b5a4fa3626ef2b9b002a963f7c3d2a2a = L.marker(
-                [41.8956, 12.4823],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_e2feeb0337c8a7f49f928d54c267615a = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_b5a4fa3626ef2b9b002a963f7c3d2a2a.setIcon(icon_e2feeb0337c8a7f49f928d54c267615a);
-        
-    
-        var popup_aba27d0defe5bfa59c6a35270fb04e22 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_bc53c67b41664be7fa267efd40f16121 = $(`<div id="html_bc53c67b41664be7fa267efd40f16121" style="width: 100.0%; height: 100.0%;"><b>Piazza Venezia</b><br>Día 2: Monumento a Vittorio Emanuele II</div>`)[0];
-            popup_aba27d0defe5bfa59c6a35270fb04e22.setContent(html_bc53c67b41664be7fa267efd40f16121);
-        
-
-        marker_b5a4fa3626ef2b9b002a963f7c3d2a2a.bindPopup(popup_aba27d0defe5bfa59c6a35270fb04e22)
-        ;
-
-        
-    
-    
-            marker_b5a4fa3626ef2b9b002a963f7c3d2a2a.bindTooltip(
-                `<div>
-                     Piazza Venezia
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_46001f60c776abc487a249648c7fa7e1 = L.marker(
-                [41.8951, 12.4946],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_c81c6ed89ed29f4b3d84ad5414e82e15 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_46001f60c776abc487a249648c7fa7e1.setIcon(icon_c81c6ed89ed29f4b3d84ad5414e82e15);
-        
-    
-        var popup_14027a95ebf66c49e2db6777f870739e = L.popup({"maxWidth": "100%"});
-
-        
-            var html_1122f4690d597474e153836e32f8da10 = $(`<div id="html_1122f4690d597474e153836e32f8da10" style="width: 100.0%; height: 100.0%;"><b>Barrio Monti</b><br>Día 2: Paseo y aperitivo</div>`)[0];
-            popup_14027a95ebf66c49e2db6777f870739e.setContent(html_1122f4690d597474e153836e32f8da10);
-        
-
-        marker_46001f60c776abc487a249648c7fa7e1.bindPopup(popup_14027a95ebf66c49e2db6777f870739e)
-        ;
-
-        
-    
-    
-            marker_46001f60c776abc487a249648c7fa7e1.bindTooltip(
-                `<div>
-                     Barrio Monti
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_e208131654c3f6db0d377def79dd003c = L.marker(
-                [41.9022, 12.4885],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_7b0ec81fbc21b4c3c7766ca569e0b2c3 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_e208131654c3f6db0d377def79dd003c.setIcon(icon_7b0ec81fbc21b4c3c7766ca569e0b2c3);
-        
-    
-        var popup_6081df87dad58012c2065987cb0664f3 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_bf4eb848538cd1742fa2d7ab511f3c28 = $(`<div id="html_bf4eb848538cd1742fa2d7ab511f3c28" style="width: 100.0%; height: 100.0%;"><b>Hostaria Romana</b><br>Día 2: Cena</div>`)[0];
-            popup_6081df87dad58012c2065987cb0664f3.setContent(html_bf4eb848538cd1742fa2d7ab511f3c28);
-        
-
-        marker_e208131654c3f6db0d377def79dd003c.bindPopup(popup_6081df87dad58012c2065987cb0664f3)
-        ;
-
-        
-    
-    
-            marker_e208131654c3f6db0d377def79dd003c.bindTooltip(
-                `<div>
-                     Hostaria Romana
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_00f96ab783bdbfa8599bf84c263c942b = L.marker(
-                [41.9065, 12.4536],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_f2e35921120655b40202e161830b32f1 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_00f96ab783bdbfa8599bf84c263c942b.setIcon(icon_f2e35921120655b40202e161830b32f1);
-        
-    
-        var popup_7ca2fa6338e5270ff746b836fe6859df = L.popup({"maxWidth": "100%"});
-
-        
-            var html_6e485f21e83d45f289e43c4a993fcc51 = $(`<div id="html_6e485f21e83d45f289e43c4a993fcc51" style="width: 100.0%; height: 100.0%;"><b>Museos Vaticanos</b><br>Día 3: Museos Vaticanos</div>`)[0];
-            popup_7ca2fa6338e5270ff746b836fe6859df.setContent(html_6e485f21e83d45f289e43c4a993fcc51);
-        
-
-        marker_00f96ab783bdbfa8599bf84c263c942b.bindPopup(popup_7ca2fa6338e5270ff746b836fe6859df)
-        ;
-
-        
-    
-    
-            marker_00f96ab783bdbfa8599bf84c263c942b.bindTooltip(
-                `<div>
-                     Museos Vaticanos
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_da61f377ae4b7320a26b9168f0b79cb5 = L.marker(
-                [41.9022, 12.4539],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_1aacaffe29bd7d6f46cbb50f5b400be1 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_da61f377ae4b7320a26b9168f0b79cb5.setIcon(icon_1aacaffe29bd7d6f46cbb50f5b400be1);
-        
-    
-        var popup_f418038ebbfff2a0f09d7003c631878a = L.popup({"maxWidth": "100%"});
-
-        
-            var html_51895b8421f064b049035a46d70f3057 = $(`<div id="html_51895b8421f064b049035a46d70f3057" style="width: 100.0%; height: 100.0%;"><b>Basílica de San Pedro</b><br>Día 3: Basílica de San Pedro</div>`)[0];
-            popup_f418038ebbfff2a0f09d7003c631878a.setContent(html_51895b8421f064b049035a46d70f3057);
-        
-
-        marker_da61f377ae4b7320a26b9168f0b79cb5.bindPopup(popup_f418038ebbfff2a0f09d7003c631878a)
-        ;
-
-        
-    
-    
-            marker_da61f377ae4b7320a26b9168f0b79cb5.bindTooltip(
-                `<div>
-                     Basílica de San Pedro
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_441119c0bec6a548f6bbeec7d161a70a = L.marker(
-                [41.9064, 12.4565],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_484f135db2304a51c8c91520898b79ad = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_441119c0bec6a548f6bbeec7d161a70a.setIcon(icon_484f135db2304a51c8c91520898b79ad);
-        
-    
-        var popup_8e1ff9be82e2aa929f138c7a01353df0 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_79e53988d7e599065fe6d499ce362d02 = $(`<div id="html_79e53988d7e599065fe6d499ce362d02" style="width: 100.0%; height: 100.0%;"><b>Pizzarium Bonci</b><br>Día 3: Almuerzo</div>`)[0];
-            popup_8e1ff9be82e2aa929f138c7a01353df0.setContent(html_79e53988d7e599065fe6d499ce362d02);
-        
-
-        marker_441119c0bec6a548f6bbeec7d161a70a.bindPopup(popup_8e1ff9be82e2aa929f138c7a01353df0)
-        ;
-
-        
-    
-    
-            marker_441119c0bec6a548f6bbeec7d161a70a.bindTooltip(
-                `<div>
-                     Pizzarium Bonci
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_9fae23d5a7ff5f40cbc709d8ad7c509d = L.marker(
-                [41.9031, 12.4663],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_4db7e3f4d25c9d4f6ecb28a7f9912de4 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_9fae23d5a7ff5f40cbc709d8ad7c509d.setIcon(icon_4db7e3f4d25c9d4f6ecb28a7f9912de4);
-        
-    
-        var popup_3b6dc288a06e29f76a3e8808ef0d56fa = L.popup({"maxWidth": "100%"});
-
-        
-            var html_066fe4f19d65a9470715bc6afbd3d1fe = $(`<div id="html_066fe4f19d65a9470715bc6afbd3d1fe" style="width: 100.0%; height: 100.0%;"><b>Castel Sant’Angelo</b><br>Día 3: Visita por la tarde</div>`)[0];
-            popup_3b6dc288a06e29f76a3e8808ef0d56fa.setContent(html_066fe4f19d65a9470715bc6afbd3d1fe);
-        
-
-        marker_9fae23d5a7ff5f40cbc709d8ad7c509d.bindPopup(popup_3b6dc288a06e29f76a3e8808ef0d56fa)
-        ;
-
-        
-    
-    
-            marker_9fae23d5a7ff5f40cbc709d8ad7c509d.bindTooltip(
-                `<div>
-                     Castel Sant’Angelo
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_01d0b328a205922b64f0f4c5341a64a0 = L.marker(
-                [41.9023, 12.4575],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_7fb1b7b931ee367f9ff8f67343b63ae4 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_01d0b328a205922b64f0f4c5341a64a0.setIcon(icon_7fb1b7b931ee367f9ff8f67343b63ae4);
-        
-    
-        var popup_cb71d5121592e5d4db9f50602253cbfe = L.popup({"maxWidth": "100%"});
-
-        
-            var html_0e5c75e6d347d841b139ac790f1492ea = $(`<div id="html_0e5c75e6d347d841b139ac790f1492ea" style="width: 100.0%; height: 100.0%;"><b>Borgo Pio</b><br>Día 3: Paseo</div>`)[0];
-            popup_cb71d5121592e5d4db9f50602253cbfe.setContent(html_0e5c75e6d347d841b139ac790f1492ea);
-        
-
-        marker_01d0b328a205922b64f0f4c5341a64a0.bindPopup(popup_cb71d5121592e5d4db9f50602253cbfe)
-        ;
-
-        
-    
-    
-            marker_01d0b328a205922b64f0f4c5341a64a0.bindTooltip(
-                `<div>
-                     Borgo Pio
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_a3123c17b9d39e085edf2f56c7b077fd = L.marker(
-                [41.9073, 12.4571],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_2fd93d39705900a36ea51402a101ed61 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_a3123c17b9d39e085edf2f56c7b077fd.setIcon(icon_2fd93d39705900a36ea51402a101ed61);
-        
-    
-        var popup_ca5fd1fe7d29107a1d4e493568627e4d = L.popup({"maxWidth": "100%"});
-
-        
-            var html_84ed22382c584a8407fc808add255333 = $(`<div id="html_84ed22382c584a8407fc808add255333" style="width: 100.0%; height: 100.0%;"><b>Les Étoiles Rooftop</b><br>Día 3: Aperitivo con vistas</div>`)[0];
-            popup_ca5fd1fe7d29107a1d4e493568627e4d.setContent(html_84ed22382c584a8407fc808add255333);
-        
-
-        marker_a3123c17b9d39e085edf2f56c7b077fd.bindPopup(popup_ca5fd1fe7d29107a1d4e493568627e4d)
-        ;
-
-        
-    
-    
-            marker_a3123c17b9d39e085edf2f56c7b077fd.bindTooltip(
-                `<div>
-                     Les Étoiles Rooftop
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_de32280ab9749d59114ff6748eeba729 = L.marker(
-                [41.9082, 12.4547],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_ee03be76f1aa1126ed07a384844992ad = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_de32280ab9749d59114ff6748eeba729.setIcon(icon_ee03be76f1aa1126ed07a384844992ad);
-        
-    
-        var popup_07f643431e050de4570e4f433077abb4 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_8801c5aaeaf290f4896ce2720af086c2 = $(`<div id="html_8801c5aaeaf290f4896ce2720af086c2" style="width: 100.0%; height: 100.0%;"><b>Osteria dell’Angelo</b><br>Día 3: Cena</div>`)[0];
-            popup_07f643431e050de4570e4f433077abb4.setContent(html_8801c5aaeaf290f4896ce2720af086c2);
-        
-
-        marker_de32280ab9749d59114ff6748eeba729.bindPopup(popup_07f643431e050de4570e4f433077abb4)
-        ;
-
-        
-    
-    
-            marker_de32280ab9749d59114ff6748eeba729.bindTooltip(
-                `<div>
-                     Osteria dell’Angelo
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_8bae0a0900433f3d9fa348aa1d1ffb56 = L.marker(
-                [41.8949, 12.4733],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_7ea3e11d5fa12b05d7357ede5cd2d2d2 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_8bae0a0900433f3d9fa348aa1d1ffb56.setIcon(icon_7ea3e11d5fa12b05d7357ede5cd2d2d2);
-        
-    
-        var popup_c40d6eb721d8955c8826d5e54e58c2b0 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_2195d6b84b7c34e4ba06a504fe8d389d = $(`<div id="html_2195d6b84b7c34e4ba06a504fe8d389d" style="width: 100.0%; height: 100.0%;"><b>Roscioli Caffè</b><br>Día 4: Desayuno</div>`)[0];
-            popup_c40d6eb721d8955c8826d5e54e58c2b0.setContent(html_2195d6b84b7c34e4ba06a504fe8d389d);
-        
-
-        marker_8bae0a0900433f3d9fa348aa1d1ffb56.bindPopup(popup_c40d6eb721d8955c8826d5e54e58c2b0)
-        ;
-
-        
-    
-    
-            marker_8bae0a0900433f3d9fa348aa1d1ffb56.bindTooltip(
-                `<div>
-                     Roscioli Caffè
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_3800b0033510072a4ac956a2b2c1c6ef = L.marker(
-                [41.8895, 12.4708],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_b64848a89cf3bbd615000723d86f26e1 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_3800b0033510072a4ac956a2b2c1c6ef.setIcon(icon_b64848a89cf3bbd615000723d86f26e1);
-        
-    
-        var popup_aeeb68ba00e1cda27d4825f525a67087 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_a8623133aece36eb42e8ca1d49e14332 = $(`<div id="html_a8623133aece36eb42e8ca1d49e14332" style="width: 100.0%; height: 100.0%;"><b>Santa Maria in Trastevere</b><br>Día 4: Trastevere</div>`)[0];
-            popup_aeeb68ba00e1cda27d4825f525a67087.setContent(html_a8623133aece36eb42e8ca1d49e14332);
-        
-
-        marker_3800b0033510072a4ac956a2b2c1c6ef.bindPopup(popup_aeeb68ba00e1cda27d4825f525a67087)
-        ;
-
-        
-    
-    
-            marker_3800b0033510072a4ac956a2b2c1c6ef.bindTooltip(
-                `<div>
-                     Santa Maria in Trastevere
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_1204b72911d564a85ec219f5c12206f8 = L.marker(
-                [41.8941, 12.4667],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_1aa2ab190405177e72ab4db513a5ec16 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_1204b72911d564a85ec219f5c12206f8.setIcon(icon_1aa2ab190405177e72ab4db513a5ec16);
-        
-    
-        var popup_949c96f63ee8fb70c2361e73dd68e36e = L.popup({"maxWidth": "100%"});
-
-        
-            var html_5515ce4e901c72a198555a7fa8f92105 = $(`<div id="html_5515ce4e901c72a198555a7fa8f92105" style="width: 100.0%; height: 100.0%;"><b>Villa Farnesina</b><br>Día 4: Frescos renacentistas</div>`)[0];
-            popup_949c96f63ee8fb70c2361e73dd68e36e.setContent(html_5515ce4e901c72a198555a7fa8f92105);
-        
-
-        marker_1204b72911d564a85ec219f5c12206f8.bindPopup(popup_949c96f63ee8fb70c2361e73dd68e36e)
-        ;
-
-        
-    
-    
-            marker_1204b72911d564a85ec219f5c12206f8.bindTooltip(
-                `<div>
-                     Villa Farnesina
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_c253abc56ef155c5961143e7c4659ace = L.marker(
-                [41.8891, 12.4698],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_a746886729e88b9ba24cf24c4b1f55fc = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_c253abc56ef155c5961143e7c4659ace.setIcon(icon_a746886729e88b9ba24cf24c4b1f55fc);
-        
-    
-        var popup_5950df14d682e85dd0d8471437509207 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_f4f7895b0f9c0b1d8c9e119b828ddc84 = $(`<div id="html_f4f7895b0f9c0b1d8c9e119b828ddc84" style="width: 100.0%; height: 100.0%;"><b>Da Teo</b><br>Día 4: Almuerzo</div>`)[0];
-            popup_5950df14d682e85dd0d8471437509207.setContent(html_f4f7895b0f9c0b1d8c9e119b828ddc84);
-        
-
-        marker_c253abc56ef155c5961143e7c4659ace.bindPopup(popup_5950df14d682e85dd0d8471437509207)
-        ;
-
-        
-    
-    
-            marker_c253abc56ef155c5961143e7c4659ace.bindTooltip(
-                `<div>
-                     Da Teo
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_fabd929827ded644948aa427ff00dbcb = L.marker(
-                [41.8936, 12.4547],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_1db8c15e0626d6ee173f79a6d0485a69 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_fabd929827ded644948aa427ff00dbcb.setIcon(icon_1db8c15e0626d6ee173f79a6d0485a69);
-        
-    
-        var popup_af2ff2fb4f164f4a2fedf2410a50c6a1 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_98c80df186c09dd0d469edca4bc03a12 = $(`<div id="html_98c80df186c09dd0d469edca4bc03a12" style="width: 100.0%; height: 100.0%;"><b>Gianicolo</b><br>Día 4: Vistas panorámicas</div>`)[0];
-            popup_af2ff2fb4f164f4a2fedf2410a50c6a1.setContent(html_98c80df186c09dd0d469edca4bc03a12);
-        
-
-        marker_fabd929827ded644948aa427ff00dbcb.bindPopup(popup_af2ff2fb4f164f4a2fedf2410a50c6a1)
-        ;
-
-        
-    
-    
-            marker_fabd929827ded644948aa427ff00dbcb.bindTooltip(
-                `<div>
-                     Gianicolo
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_3c8ae519d30e6468d0fbdcba528c54c2 = L.marker(
-                [41.8955, 12.4723],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_d3d2e5730acb3441ec08761178f27667 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_3c8ae519d30e6468d0fbdcba528c54c2.setIcon(icon_d3d2e5730acb3441ec08761178f27667);
-        
-    
-        var popup_4e596de5cea29b5da99c60ffce5386b3 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_61896054f463b71c776a718bcaa21162 = $(`<div id="html_61896054f463b71c776a718bcaa21162" style="width: 100.0%; height: 100.0%;"><b>Campo de’ Fiori</b><br>Día 4: Últimas compras</div>`)[0];
-            popup_4e596de5cea29b5da99c60ffce5386b3.setContent(html_61896054f463b71c776a718bcaa21162);
-        
-
-        marker_3c8ae519d30e6468d0fbdcba528c54c2.bindPopup(popup_4e596de5cea29b5da99c60ffce5386b3)
-        ;
-
-        
-    
-    
-            marker_3c8ae519d30e6468d0fbdcba528c54c2.bindTooltip(
-                `<div>
-                     Campo de’ Fiori
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-            var marker_e30b62af925a89362e4702646ce66d4c = L.marker(
-                [41.8896, 12.4702],
-                {}
-            ).addTo(marker_cluster_6a7eeec4406663d285fc81f925fdf933);
-        
-    
-            var icon_faa44cb29c9147002191965264cfe969 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
-            );
-            marker_e30b62af925a89362e4702646ce66d4c.setIcon(icon_faa44cb29c9147002191965264cfe969);
-        
-    
-        var popup_335a6cda0f50397f07addb60599849a2 = L.popup({"maxWidth": "100%"});
-
-        
-            var html_504cdebe42f3241cf1c7de5ab8047958 = $(`<div id="html_504cdebe42f3241cf1c7de5ab8047958" style="width: 100.0%; height: 100.0%;"><b>Enoteca Ferrara</b><br>Día 4: Aperitivo final</div>`)[0];
-            popup_335a6cda0f50397f07addb60599849a2.setContent(html_504cdebe42f3241cf1c7de5ab8047958);
-        
-
-        marker_e30b62af925a89362e4702646ce66d4c.bindPopup(popup_335a6cda0f50397f07addb60599849a2)
-        ;
-
-        
-    
-    
-            marker_e30b62af925a89362e4702646ce66d4c.bindTooltip(
-                `<div>
-                     Enoteca Ferrara
-                 </div>`,
-                {"sticky": true}
-            );
-        
-</script>
 </html>
